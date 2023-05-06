@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <br>
+    <div class="container-fluid">
+
+        <h2>Admin Only</h2>
+        <h2>Add a new News</h2>
+        <br>
+
+        <form th:action="@{/news/save}" th:object="${theNews}" method="post"
+              style="max-width: 700px; margin: 0 auto"
+              enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="border border-secondary rounded p-3">
+                <div class="form-group row col-md">
+                    <label class="col-sm-4 col-form-label">Title</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" th:field="*{title}" required minlength="3" maxlength="45">
+                    </div>
+                </div>
+                <div class="form-group row col-md">
+                    <label class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" th:field="*{description}" required minlength="3" maxlength="2000">
+                    </div>
+                </div>
+                <div class="form-group row col-md">
+                    <label class="col-sm-4 col-form-label">Photos</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" th:field="*{image}"/>
+                        <input type="file"  id="fileImage" name="user-image" accept="image/png, image/jpeg" class="mb-2"/>
+                        <img id="thumbnail"  alt="photo-preview" th:src="@{${theNews.photosImagePath}}"
+                             style="width: 90px" class="img-fluid"/>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Save News" class="btn btn-primary m-3">
+                    <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancelJQ">
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+
+    <script th:src="@{/js/common-form.js}"></script>
+
+</body>
+</html>
+
